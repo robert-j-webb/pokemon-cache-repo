@@ -1,16 +1,18 @@
-import { readFileSync, writeFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import path from 'path';
+import { readFileSync, writeFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import path from "path";
 
-import { notFound } from 'next/navigation';
+import { notFound } from "next/navigation";
 
-import { Pokemon } from './pokemon-types';
+import { Pokemon } from "./pokemon-types";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const jsonFileName = `${__dirname}/pokemons.json`;
 
+let times = 0;
 export async function getPokemons(): Promise<Pokemon[]> {
-  const file = readFileSync(jsonFileName, 'utf8');
+  console.log("read times:", ++times);
+  const file = readFileSync(jsonFileName, "utf8");
 
   const allPokemon: Pokemon[] = JSON.parse(file);
 

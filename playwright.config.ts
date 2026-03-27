@@ -5,7 +5,7 @@ import { defineConfig, devices } from "@playwright/test";
  */
 export default defineConfig({
   /* When a test runs longer than 5 seconds consider it failed */
-  timeout: 5000,
+  timeout: 3000,
   // Our tests are located in the src folder next to the code
   testDir: "./app",
   // Match all files ending in e2e.ts
@@ -14,7 +14,7 @@ export default defineConfig({
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  retries: 5,
+  retries: 0,
   /* Opt out of parallel tests */
   workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -38,13 +38,17 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: "setup db",
+      testMatch: /global\.teardown\.ts/,
+      teardown: "cleanup db",
+    },
+    {
+      name: "cleanup db",
+      testMatch: /global\.teardown\.ts/,
+    },
+    {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
-    },
-
-    {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
     },
 
     {

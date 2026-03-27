@@ -1,6 +1,6 @@
 "use server";
 
-import { cacheLife, cacheTag, updateTag } from "next/cache";
+import { cacheLife, cacheTag, revalidateTag, updateTag } from "next/cache";
 
 export async function cachePokemon(pokemonId: string | number) {
   cacheLife("max");
@@ -9,4 +9,5 @@ export async function cachePokemon(pokemonId: string | number) {
 
 export async function clearPokemonFromCache(pokemonId: string | number) {
   updateTag(`pokemon-${pokemonId}`);
+  // revalidateTag(`pokemon-${pokemonId}`, "max");
 }
