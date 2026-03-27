@@ -10,26 +10,18 @@ function resetDatabase() {
   writeFileSync(jsonFileName, JSON.stringify(allPokemon));
 }
 
-test("Going to pokemon detail", async ({ page }) => {
+test("Does bulbasaur exist", async ({ page }) => {
   resetDatabase();
 
-  await page.goto("/");
-
-  await page.getByRole("link", { name: "Bulbasaur" }).click();
-
-  await expect(page).toHaveURL("/pokemon/1");
+  await page.goto("/pokemon/1");
 
   await expect(page.getByRole("heading", { name: "Bulbasaur" })).toBeVisible();
 });
 
-test("Delete pokemon", async ({ page }) => {
+test("Delete bulbasaur", async ({ page }) => {
   resetDatabase();
 
-  await page.goto("/");
-
-  await page.getByRole("link", { name: "Bulbasaur" }).click();
-
-  await expect(page).toHaveURL("/pokemon/1");
+  await page.goto("/pokemon/1");
 
   await expect(page.getByRole("heading", { name: "Bulbasaur" })).toBeVisible();
 

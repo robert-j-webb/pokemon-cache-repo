@@ -22,7 +22,7 @@ export function PokemonDelete({ pokemon }: Props) {
 
     await clearPokemonFromCache(pokemon.id);
 
-    router.push("/pokemon");
+    // router.push("/pokemon");
   }
 
   async function onPokemonDeleteSucceeds() {
@@ -35,7 +35,7 @@ export function PokemonDelete({ pokemon }: Props) {
 
   return (
     // Swap with `onPokemonDeleteSucceeds` to see the test work.
-    <button type="button" onClick={onPokemonDeleteFails}>
+    <button type="button" onClick={onPokemonDeleteSucceeds}>
       Delete pokemon
     </button>
   );

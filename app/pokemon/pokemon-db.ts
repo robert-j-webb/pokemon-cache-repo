@@ -9,9 +9,9 @@ import { Pokemon } from "./pokemon-types";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const jsonFileName = `${__dirname}/pokemons.json`;
 
-let times = 0;
+let deleteTimes = 0;
+let getTimes = 0;
 export async function getPokemons(): Promise<Pokemon[]> {
-  console.log("read times:", ++times);
   const file = readFileSync(jsonFileName, "utf8");
 
   const allPokemon: Pokemon[] = JSON.parse(file);
@@ -20,6 +20,8 @@ export async function getPokemons(): Promise<Pokemon[]> {
 }
 
 export async function getPokemon(id: string) {
+  console.log("read times:", ++getTimes);
+
   const allPokemon = await getPokemons();
 
   const pokemon = allPokemon.find((pokemon) => pokemon.id === id);
@@ -32,6 +34,8 @@ export async function getPokemon(id: string) {
 }
 
 export async function deletePokemon(id: string) {
+  console.log("delete times:", ++getTimes);
+
   const allPokemon = await getPokemons();
 
   const remaining = allPokemon.filter((pokemon) => pokemon.id !== id);
